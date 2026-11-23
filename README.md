@@ -16,6 +16,8 @@ costing money without doing anything useful, and prints an estimated monthly cos
 | `ebs-unattached` | EBS volumes in the `available` state (not attached to any instance) |
 | `eip-unassociated` | Elastic IPs that are allocated but not associated with an instance or ENI |
 | `snapshot-old` | Snapshots older than `--snapshot-age-days` (default 90) that no AMI of yours uses |
+| `nat-idle` | NAT gateways with no traffic in either direction for `--nat-idle-days` (default 14), based on CloudWatch metrics |
+| `instance-stopped` | Instances stopped for more than `--stopped-days` (default 30); the cost is their attached EBS volumes, which keep billing |
 
 ## Install
 
@@ -37,7 +39,10 @@ permissions are:
         "ec2:DescribeVolumes",
         "ec2:DescribeAddresses",
         "ec2:DescribeSnapshots",
-        "ec2:DescribeImages"
+        "ec2:DescribeImages",
+        "ec2:DescribeNatGateways",
+        "ec2:DescribeInstances",
+        "cloudwatch:GetMetricStatistics"
       ],
       "Resource": "*"
     }

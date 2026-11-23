@@ -61,6 +61,18 @@ def build_parser() -> argparse.ArgumentParser:
         default=Settings.snapshot_age_days,
         help="flag snapshots older than this (default: %(default)s)",
     )
+    scan.add_argument(
+        "--nat-idle-days",
+        type=int,
+        default=Settings.nat_idle_days,
+        help="flag NAT gateways with no traffic for this many days (default: %(default)s)",
+    )
+    scan.add_argument(
+        "--stopped-days",
+        type=int,
+        default=Settings.stopped_instance_days,
+        help="flag instances stopped for longer than this (default: %(default)s)",
+    )
     scan.add_argument("--format", choices=FORMATS, default="text", help="output format")
     scan.add_argument("--output", "-o", help="write the report to this file instead of stdout")
     return parser
@@ -69,7 +81,11 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv=None) -> int:
     args = build_parser().parse_args(argv)
     session = boto3.Session(profile_name=args.profile)
-    settings = Settings(snapshot_age_days=args.snapshot_age_days)
+    settings = Settings(
+        snapshot_age_days=args.snapshot_age_days,
+        nat_idle_days=args.nat_idle_days,
+        stopped_instance_days=args.stopped_days,
+    )
     if args.all_regions:
         regions = enabled_regions(session)
     else:

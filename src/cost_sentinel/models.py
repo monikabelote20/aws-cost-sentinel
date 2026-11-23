@@ -11,3 +11,4 @@ class Finding:
     summary: str
     monthly_cost: float
     details: dict = field(default_factory=dict, compare=False, hash=False)
+    tags: dict = field(default_factory=dict, compare=False, hash=False)

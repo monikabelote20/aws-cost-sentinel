@@ -24,6 +24,7 @@ def find_unattached_volumes(
                     summary=f"{size} GiB {vtype}, unattached",
                     monthly_cost=cost,
                     details={"created": vol["CreateTime"].isoformat()},
+                    tags={t["Key"]: t["Value"] for t in vol.get("Tags", [])},
                 )
             )
     return findings

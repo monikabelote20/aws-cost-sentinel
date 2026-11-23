@@ -22,6 +22,7 @@ def find_unassociated_eips(session, region: str, settings: Settings | None = Non
                 summary=f"{addr['PublicIp']}, not associated",
                 monthly_cost=PUBLIC_IPV4_MONTH,
                 details={"public_ip": addr["PublicIp"]},
+                tags={t["Key"]: t["Value"] for t in addr.get("Tags", [])},
             )
         )
     return findings

@@ -28,6 +28,9 @@ HOURS_PER_MONTH = 730
 # Public IPv4 addresses, including idle Elastic IPs: $0.005 per hour.
 PUBLIC_IPV4_MONTH = round(0.005 * HOURS_PER_MONTH, 2)
 
+# NAT gateway hourly charge ($0.045/hour), excluding per-GB data processing.
+NAT_GATEWAY_MONTH = round(0.045 * HOURS_PER_MONTH, 2)
+
 
 def ebs_volume_monthly(
     volume_type: str, size_gib: int, iops: int = 0, throughput: int = 0

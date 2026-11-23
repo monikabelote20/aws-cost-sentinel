@@ -45,6 +45,7 @@ def find_old_snapshots(
                     summary=f"{size} GiB, {age} days old",
                     monthly_cost=round(size * EBS_SNAPSHOT_GB_MONTH, 2),
                     details={"volume_id": snap.get("VolumeId"), "age_days": age},
+                    tags={t["Key"]: t["Value"] for t in snap.get("Tags", [])},
                 )
             )
     return findings
