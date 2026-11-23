@@ -14,6 +14,8 @@ costing money without doing anything useful, and prints an estimated monthly cos
 | Check | What it flags |
 |-------|---------------|
 | `ebs-unattached` | EBS volumes in the `available` state (not attached to any instance) |
+| `eip-unassociated` | Elastic IPs that are allocated but not associated with an instance or ENI |
+| `snapshot-old` | Snapshots older than `--snapshot-age-days` (default 90) that no AMI of yours uses |
 
 ## Install
 
@@ -38,6 +40,7 @@ ebs-unattached  vol-0f9e8d7c6b5a43210  eu-west-1  500 GiB gp2, unattached   $50.
 2 findings, estimated $58.00/month
 ```
 
+Snapshot costs use the full volume size, so they are an upper bound (snapshots are incremental).
 Cost estimates use us-east-1 on-demand list prices. They are meant for prioritising clean-up, not
 for billing.
 

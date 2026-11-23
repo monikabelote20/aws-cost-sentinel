@@ -11,6 +11,9 @@ EBS_GB_MONTH = {
     "standard": 0.05,
 }
 
+# EBS snapshots, standard tier, USD per GiB-month.
+EBS_SNAPSHOT_GB_MONTH = 0.05
+
 # io1/io2 also bill provisioned IOPS (first tier), USD per IOPS-month.
 EBS_IOPS_MONTH = {"io1": 0.065, "io2": 0.065}
 
@@ -19,6 +22,11 @@ GP3_FREE_IOPS = 3000
 GP3_IOPS_MONTH = 0.005
 GP3_FREE_THROUGHPUT = 125
 GP3_THROUGHPUT_MONTH = 0.04  # per MB/s-month
+
+HOURS_PER_MONTH = 730
+
+# Public IPv4 addresses, including idle Elastic IPs: $0.005 per hour.
+PUBLIC_IPV4_MONTH = round(0.005 * HOURS_PER_MONTH, 2)
 
 
 def ebs_volume_monthly(

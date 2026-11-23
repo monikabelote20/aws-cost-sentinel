@@ -1,8 +1,11 @@
 from cost_sentinel.models import Finding
 from cost_sentinel.pricing import ebs_volume_monthly
+from cost_sentinel.settings import Settings
 
 
-def find_unattached_volumes(session, region: str) -> list[Finding]:
+def find_unattached_volumes(
+    session, region: str, settings: Settings | None = None
+) -> list[Finding]:
     """EBS volumes in the `available` state are billed but attached to nothing."""
     ec2 = session.client("ec2", region_name=region)
     findings = []
