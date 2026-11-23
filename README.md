@@ -23,15 +23,44 @@ costing money without doing anything useful, and prints an estimated monthly cos
 pip install -e .
 ```
 
-Requires Python 3.11+ and AWS credentials with read-only EC2 access.
+Requires Python 3.11+ and AWS credentials with read-only EC2 access. The minimum IAM
+permissions are:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeRegions",
+        "ec2:DescribeVolumes",
+        "ec2:DescribeAddresses",
+        "ec2:DescribeSnapshots",
+        "ec2:DescribeImages"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
+```
 
 ## Usage
 
 ```bash
 cost-sentinel scan --region eu-west-1
+cost-sentinel scan --region eu-west-1,ap-south-1   # several regions
+cost-sentinel scan --all-regions                    # every enabled region
 ```
 
-Example output:
+Write a Markdown or JSON report instead of the console table:
+
+```bash
+cost-sentinel scan --region eu-west-1 --format markdown -o cost-report.md
+cost-sentinel scan --region eu-west-1 --format json | jq '.total_monthly_cost'
+```
+
+Example console output:
 
 ```
 ebs-unattached  vol-0a1b2c3d4e5f67890  eu-west-1  100 GiB gp3, unattached   $8.00/mo

@@ -1,8 +1,9 @@
 import pytest
 
 from cost_sentinel.checks.ebs import find_unattached_volumes
-from cost_sentinel.cli import render_text, run_checks
+from cost_sentinel.cli import run_checks
 from cost_sentinel.pricing import ebs_volume_monthly
+from cost_sentinel.report import render_text
 
 REGION = "us-east-1"
 
