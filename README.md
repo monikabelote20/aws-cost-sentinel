@@ -2,7 +2,6 @@
 
 [![ci](https://github.com/monikabelote20/aws-cost-sentinel/actions/workflows/ci.yml/badge.svg)](https://github.com/monikabelote20/aws-cost-sentinel/actions/workflows/ci.yml)
 
-_Built and maintained with an AI coding agent (Claude, by Anthropic) under the direction of [@monikabelote20](https://github.com/monikabelote20)._
 
 Find idle and wasteful AWS resources and estimate what they cost each month.
 
